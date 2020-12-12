@@ -1,63 +1,114 @@
 
-
 // ::::::::::  api-routes.js  :::::::::: 
 
 const db = require("../models");
-const mongoose = require("mongoose");
-
-String.prototype.toObjectId = function () {
-    var ObjectId = (require('mongoose').Types.ObjectId);
-    return new ObjectId(this.toString());
-};
 
 // Route for API workouts
-module.exports = function (app) {
+module.exports = (app) => {
     // GET route: Query all workouts
-    app.get("/api/workouts", function (req, res) {
+    app.get("/api/workouts", (req, res) => {
         db.Workout.find({})
-            .sort({ "day": 1 })
-            .then(dbWorkout => {
-                res.json(dbWorkout);
+            .then((results) => {
+                res.json(results);
             })
-            .catch(err => {
+            .catch((err) => {
                 res.json(err);
-            })
+            });
     });
 
     // GET route: Query workouts data from a specific range
-    app.get("/api/workouts/range", function (req, res) {
-        db.Workout.find({})
-            .sort({ "day": 1 })
-            .then(dbWorkout => {
-                res.json(dbWorkout);
-            })
-            .catch(err => {
-                res.json(err);
-            })
+    app.get("/api/workouts/range", (req, res) => {
+        const oneWeekAgo = new Date();
+        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+        db.Workout.find({
+            day: {
+                $exists: true,
+            },
+        }, (err, docs) => {
+            const data = [
+                {
+                    dayOfWeek: "Monday",
+                    dayNumber: 1,
+                    totalDuration: 0,
+                    totalWeight: 0,
+                    exerciseNames: [],
+                },
+                {
+                    dayOfWeek: "Tuesday",
+                    dayNumber: 2,
+                    totalDuration: 0,
+                    totalWeight: 0,
+                    exerciseNames: [],
+                },
+                {
+                    dayOfWeek: "Wednesday",
+                    dayNumber: 3,
+                    totalDuration: 0,
+                    totalWeight: 0,
+                    exerciseNames: [],
+                },
+                {
+                    dayOfWeek: "Thursday",
+                    dayNumber: 4,
+                    totalDuration: 0,
+                    totalWeight: 0,
+                    exerciseNames: [],
+                },
+                {
+                    dayOfWeek: "Friday",
+                    dayNumber: 5,
+                    totalDuration: 0,
+                    totalWeight: 0,
+                    exerciseNames: [],
+                },
+                {
+                    dayOfWeek: "Saturday",
+                    dayNumber: 6,
+                    totalDuration: 0,
+                    totalWeight: 0,
+                    exerciseNames: [],
+                },
+                {
+                    dayOfWeek: "Sunday",
+                    dayNumber: 7,
+                    totalDuration: 0,
+                    totalWeight: 0,
+                    exerciseNames: [],
+                },
+            ];
+
+            docs.forEach((workout) => {
+                let dayNumber = workout.day.getDay();
+                if (dayNumber === 0) dayNumber = 7;
+                data[dayNumber - 1].totalDuration += workout.totalDuration;
+                data[dayNumber - 1].totalWeight += workout.totalWeight;
+                workout.exercises.forEach((exercise) => {
+                    data[dayNumber - 1].exerciseNames.push(exercise.name);
+                });
+            });
+
+            const toDay = new Date();
+            if (data[6].dayNumber !== toDay.getDay()) {
+                data.unshift(data.pop());
+            }
+            return res.json(data);
+        });
     });
 
     // POST route: Submit new completed workouts
-    app.post("/api/workouts", function (req, res) {
-        const workout = new db.Workout();
-        db.Workout.create(workout)
-            .then(dbWorkout => {
-                res.json(dbWorkout);
-            })
-            .catch(err => {
+    app.post("/api/workouts", (req, res) => {
+        const workout = req.body;
+        db.Workout.create({ workout }).then((result) => res.json(result))
+            .catch((err) => {
                 res.json(err);
-            })
+            });
     });
 
     // PUT route: Add new workouts
-    app.put("/api/workouts/:id", function (req, res) {
-        db.Workout.update({
-            _id: req.params.id.toObjectId()
-        }, {
-            $push: { exercises: req.body }
-        })
-            .then(function (data) {
-                res.json(data);
-            })
+    app.put("/api/workouts/:id", (req, res) => {
+        const exercise = req.body;
+        db.Workout.updateOne({ _id: req.params.id }, { $push: { exercises: exercise } })
+            .then((result) => res.json(result));
     });
+};
 
-}
