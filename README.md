@@ -22,7 +22,7 @@
 
    Next, go back to the project root directory and type `node server.js` to run the server and the app. 
 
-  This application is deployed with [Heroku](https://www.heroku.com/home), and [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/signup). You can access it [here](https://fierce-brushlands-17958.herokuapp.com/)
+  This application is deployed with [Heroku](https://www.heroku.com/home), and [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/signup). You can access it [here](https://fierce-brushlands-17958.herokuapp.com/).
 
   ## Usage 
   
