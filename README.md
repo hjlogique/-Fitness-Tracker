@@ -28,11 +28,13 @@
   
   Once the application runs locally or on Heroku, the last workout information is displayed on the main page. Here users can create new workout by selecting the `Add Exercise` button, or continue with the last workout by selecting the `Continue Workout` button. The app create a new workout for the current date. There are two default options, `Resistance` and `Cardio` for `Exercise Type` to select from. Once one of the options is selected, users can enter the required information and add the new exercise to the database. Then users can enter the new exercise information and complete the workout. The application goes back to the main page and all the information for the new workout are populated. By selecting the `Continue Workout` button, users can use an existing exercise type and complete a workout, information of which will be automatically updated in the last workout information. By selecting `Dashboard` link in the application, graphic presentations of the workout durations and lifted weights for all weekdays are displayed (see the screenshots below).
   
-  ![Main page](/screenshots/img1.png)
+  ![image 1](/screenshots/img1.png)
 
-  ![Main page](/screenshots/img2.png)
+  ![image 2](/screenshots/img2.png)
 
-   ![Main page](/screenshots/img3.png)
+   ![image 3](/screenshots/img3.png)
+
+   ![image 4](/screenshots/img3.png)
 
   ## Contributing
   
