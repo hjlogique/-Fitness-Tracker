@@ -26,7 +26,13 @@
 
   ## Usage 
   
-  Once the application runs locally or on Heroku, the last workout information is displayed on the main page. Here users can create a new exercise by selecting the `Add Exercise` button, or complete an exercise as a part of the last workout by selecting the `Continue Workout` button. In the `Add Exercise` section, there are two default options, `Resistance` and `Cardio` for the `Exercise Type` to select from. Once one of the options is selected, users can enter the required information and add the new exercise to the database. Then users can enter the new created exercise information, and complete their new workout in the current date. By completing the workout, the application returns to the main page and all the information for the new workout is populated. Users can also select the `Continue Workout` button to use an existing exercise type and complete it as a part of the last workout. This updates the information of the last workout in the main page accordingly. By selecting `Dashboard` link in the application, graphic presentations of combined durations and lifted weights for all weekdays are displayed (see the screenshots below).
+  Once the application runs locally or on Heroku, the last workout information is displayed on the main page. Here users can create a new exercise by selecting the `Add Exercise` button, or complete an exercise as a part of the last workout by selecting the `Continue Workout` button. 
+
+  In the `Add Exercise` section, there are two default options, `Resistance` and `Cardio` for the `Exercise Type` to select from. Once one of the options is selected, users can enter the required information and add the new exercise to the database. Then users can enter the new created exercise information, and complete their new workout in the current date. By completing the workout, the application returns to the main page and all the information for the new workout is populated. 
+  
+  Users can also select the `Continue Workout` button to use an existing exercise type and complete it as a part of the last workout. This updates the information of the last workout in the main page accordingly. 
+  
+  By selecting the `Dashboard` link in the application, graphic presentations of combined durations and lifted weights for all weekdays are displayed (see the screenshots below).
   
   ![image 1](/screenshots/img1.png)
 
